@@ -15,9 +15,9 @@ public class GoodsServiceImpi implements GoodsService {
 	@Autowired
 	private GoodsMapper goodsMapper;
 
-	public List<Goods> getAllGoods() {
+	public List<Goods> getAllGoods(boolean published) {
 		// TODO Auto-generated method stub
-		return goodsMapper.getAllGoods();
+		return goodsMapper.getAllGoods(published);
 	}
 
 	public List<Goods> getGoods(String colunm, String value) {
@@ -35,5 +35,23 @@ public class GoodsServiceImpi implements GoodsService {
 		goodsMapper.updateGoods(goods);
 	}
 
+	public void published(int id) {
+		// TODO Auto-generated method stub
+		Goods goods = goodsMapper.getOneGoods(id);
+		goods.setPublished(true);
+		goodsMapper.updateGoods(goods);
+	}
+
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		Goods goods = goodsMapper.getOneGoods(id);
+		goods.setDelete(true);
+		goodsMapper.updateGoods(goods);
+	}
+	
+	public List<Goods> getdelete() {
+		// TODO Auto-generated method stub
+		return goodsMapper.getdelete();
+	}
 
 }

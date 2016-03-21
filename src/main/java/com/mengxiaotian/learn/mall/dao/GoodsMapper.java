@@ -17,15 +17,18 @@ public interface GoodsMapper {
 	@Delete("DELETE Goods WHERE id=#{id}")
 	public void deleteGoods(int id);
 
-	@Update("UPDATE Goods SET name=#{name},description=#{description},point=#{point},pulished=#{published},isDelete=#{isDelete} WHERE id=#{id}")
+	@Update("UPDATE Goods SET name=#{name},description=#{description},point=#{point},published=#{published},isDelete=#{isDelete} WHERE id=#{id}")
 	public void updateGoods(Goods goods);
 
-	@Select("SELECT * FROM Goods")
-	public List<Goods> getAllGoods();
+	@Select("SELECT * FROM Goods WHERE published=#{published}  AND isDelete=false")
+	public List<Goods> getAllGoods(boolean published);
 
 	@Select("SELECT * FROM Goods WHERE #{colunm}=#{value}")
 	public List<Goods> getGoods(@Param("colunm") String colunm, @Param("value") String value);
 	
 	@Select("SELECT * FROM Goods WHERE id=#{id}")
 	public Goods getOneGoods(int id);
+	
+	@Select("SELECT * FROM Goods WHERE isDelete=true")
+	public List<Goods> getdelete();
 }

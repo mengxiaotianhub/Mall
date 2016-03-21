@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 import com.mengxiaotian.learn.mall.dao.ManagerMapper;
 import com.mengxiaotian.learn.mall.dao.UserMapper;
 import com.mengxiaotian.learn.mall.meta.User;
-import com.mengxiaotian.learn.mall.servlet.Login;
+import com.mengxiaotian.learn.mall.servlet.LoginService;
 
 @Component("login")
-public class LoginImpi implements Login {
+public class LoginImpi implements LoginService {
 	@Autowired
 	private UserMapper userMapper;
 	@Autowired

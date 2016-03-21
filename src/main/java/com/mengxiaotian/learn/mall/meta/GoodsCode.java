@@ -6,7 +6,7 @@ public class GoodsCode {
 	private int id;
 	private String userName;
 	private int goodsId;
-	private int code;
+	private String code;
 	private Date exchangeTime;
 	private boolean exchanged;
 
@@ -34,11 +34,12 @@ public class GoodsCode {
 		this.goodsId = goodsId;
 	}
 
-	public int getCode() {
+
+	public String getCode() {
 		return code;
 	}
 
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 

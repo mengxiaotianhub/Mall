@@ -6,7 +6,7 @@ import com.mengxiaotian.learn.mall.meta.Goods;
 
 public interface GoodsService {
 	
-	public List<Goods> getAllGoods();
+	public List<Goods> getAllGoods(boolean published);
 	
 	public List<Goods> getGoods(String colunm,String value);
 	
@@ -14,5 +14,9 @@ public interface GoodsService {
 	
 	public void updateGoods(Goods goods);
 	
+	public void published(int id);
 
+	public List<Goods> getdelete();
+	
+	public void delete(int id);
 }

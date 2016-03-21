@@ -19,12 +19,12 @@ public interface UserMapper {
 
 	@Select("SELECT point FROM User WHERE id=#{id}")
 	public int getPoint(int id);
-	
-	@Update("UPDATE User SET point=#{point}")
-	public void updatePoint(int point);
-	
+
 	@Select("SELECT userName FROM User WHERE id=#{id}")
 	public String getUserName(int id);
+
+	@Update("UPDATE User SET point=#{point}")
+	public void updatePoint(int point);
 
 	@Insert("INSERT INTO User SET userName=#{userName},password=#{password},point=#{point}")
 	public void addUser(User user);
