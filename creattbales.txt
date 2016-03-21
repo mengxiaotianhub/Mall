@@ -1,0 +1,81 @@
+use mall;
+
+drop TABLE Goods,GoodsCode,User,Manager;
+
+CREATE TABLE Goods (  
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,  
+  `name` varchar(100) NOT NULL,
+  `description` varchar(100) NOT NULL,  
+  `point` int(10) unsigned NOT NULL,  
+  `published` bool NOT NULL,
+  `isDelete` bool NOT NULL DEFAULT false,   
+   PRIMARY KEY (`id`),  
+   INDEX(`name`),  
+   INDEX(`published`)  
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8;  
+
+
+CREATE TABLE GoodsCode (  
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,  
+  `userName` varchar(100),  
+  `goodsId` int(10) unsigned NOT NULL,  
+  `code` varchar(100)  NOT NULL ,
+  `exchangeTime` datetime  ,
+  `exchanged` bool DEFAULT false ,
+   PRIMARY KEY (`id`) 
+  )ENGINE=InnoDB AUTO_INCREMENT=1000000 DEFAULT CHARSET=utf8; 
+
+CREATE TABLE User 
+(`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`userName` varchar(50) NOT NULL,
+`password` int(10) NOT NULL,
+`point` int(10),
+PRIMARY KEY (`id`))ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE Manager
+(`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`managerName` varchar(50) NOT NULL,
+`password` int(10) NOT NULL,
+PRIMARY KEY (`id`))ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+insert into User (userName,password,point) value('xiaohong',123456,1000);
+insert into Manager(managerName,password) value('xiaowang',123456);
+insert into Goods(name,description,point,published,isDelete) value('iphone','great phone',100,true,false);
+insert into Goods(name,description,point,published,isDelete) value('iwatch','great watch',50,true,false);
+insert into Goods(name,description,point,published,isDelete) value('wall','great wall',20,true,false);
+insert into Goods(name,description,point,published,isDelete) value('dog','great dog',10,true,false);
+insert into Goods(name,description,point,published,isDelete) value('cat','great cat',150,true,false);
+insert into GoodsCode(goodsId,code) value(1,'asdfasdfea');
+insert into GoodsCode(goodsId,code) value(1,'asdfewar');
+insert into GoodsCode(goodsId,code) value(1,'asdfasdfasdf');
+insert into GoodsCode(goodsId,code) value(1,'sadfewqrqtxcvb');
+insert into GoodsCode(goodsId,code) value(1,'klajsdhflkjh');
+insert into GoodsCode(goodsId,code) value(1,'sdfadgw');
+insert into GoodsCode(goodsId,code) value(1,'asdfqwertdfg');
+insert into GoodsCode(goodsId,code) value(1,'aisudflhbv');
+insert into GoodsCode(goodsId,code) value(1,'asdjflhblva');
+insert into GoodsCode(goodsId,code) value(1,'akjsdbfabvaljds');
+insert into GoodsCode(goodsId,code) value(2,'alksjdfbliav');
+insert into GoodsCode(goodsId,code) value(2,'alksjvdblasuv');
+insert into GoodsCode(goodsId,code) value(2,'alksjdvblaksjh');
+insert into GoodsCode(goodsId,code) value(2,'alhbvlaiuscbv');
+insert into GoodsCode(goodsId,code) value(2,'lakjsbvlahbv');
+insert into GoodsCode(goodsId,code) value(2,'akjsdvbliabdv');
+insert into GoodsCode(goodsId,code) value(2,'ajsdhvblasdv');
+insert into GoodsCode(goodsId,code) value(2,'aksdjbviluab');
+insert into GoodsCode(goodsId,code) value(2,'aslkdjvblab');
+insert into GoodsCode(goodsId,code) value(2,'alksjcbvlkj');
+insert into GoodsCode(goodsId,code) value(2,'aksjdbvlkjad');
+insert into GoodsCode(goodsId,code) value(2,'alksjdbvlkjabdv');
+insert into GoodsCode(goodsId,code) value(3,'asdfasdgdv');
+insert into GoodsCode(goodsId,code) value(3,'alksjcbvacvdclkjabdv');
+insert into GoodsCode(goodsId,code) value(3,'alksjasdfadskjabdv');
+insert into GoodsCode(goodsId,code) value(3,'alksjdbsghsfghabdv');
+insert into GoodsCode(goodsId,code) value(4,'alksadfgfdgjabdv');
+insert into GoodsCode(goodsId,code) value(4,'alksjavacvadfabdv');
+insert into GoodsCode(goodsId,code) value(4,'alksjdbvlkaadbvlkjabdv');
+insert into GoodsCode(goodsId,code) value(4,'alksjdasdgHAjabdv');
+insert into GoodsCode(goodsId,code) value(5,'ADFAGdbvlkjabdv');
+insert into GoodsCode(goodsId,code) value(5,'aadfgafglkjabdv');
+insert into GoodsCode(goodsId,code) value(5,'adfgeregdfvlkjabdv');
+insert into GoodsCode(goodsId,code) value(5,'adfaetgratlkjabdv');
