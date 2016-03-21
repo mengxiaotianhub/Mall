@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.mengxiaotian.learn.mall.meta.Manager;
+import com.mengxiaotian.learn.mall.meta.User;
 
 public interface ManagerMapper {
 	@Select("SELECT * FROM Manager")
@@ -17,5 +18,8 @@ public interface ManagerMapper {
 
 	@Insert("INSERT INTO Manager SET managerName=#{managerName},password=#{password}")
 	public void addManager(Manager manager);
+	
+	@Select("SELECT * FROM Manager WHERE managerName=#{managerName}")
+	public Manager getManager(String managerName);
 
 }

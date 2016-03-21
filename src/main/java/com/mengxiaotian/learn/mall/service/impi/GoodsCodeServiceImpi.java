@@ -2,6 +2,7 @@ package com.mengxiaotian.learn.mall.service.impi;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,17 +44,17 @@ public class GoodsCodeServiceImpi implements GoodsCodeService {
 		return codeMapper.getCodes(colunm, value);
 	}
 
-	public GoodsCode exchange(int userId,int goodsId) {
+	public GoodsCode exchange(String userName,int goodsId) {
 		// TODO Auto-generated method stub
 		GoodsCode code = null;
-		int userPoint = userMapper.getPoint(userId);
+		int userPoint = userMapper.getPoint(userName);
 		int goodsPoint = goodsMapper.getOneGoods(goodsId).getPoint();
 		if(userPoint>=goodsPoint){
 			code=codeMapper.getOneNotExchenged(goodsId);
 			if(code!=null){
 				 code.setExchanged(true);
 				 code.setExchangeTime(new Date());
-				 code.setUserName(userMapper.getUserName(userId));
+				 code.setUserName(userName);
 				 codeMapper.updateGoodsCode(code);
 				 userMapper.updatePoint(userPoint-goodsPoint);
 			}else{
@@ -63,6 +64,14 @@ public class GoodsCodeServiceImpi implements GoodsCodeService {
 			throw new NotEnoughPoint();
 		}
 		return code;
+	}
+
+	public void addGoodsCode(int goodsId) {
+		// TODO Auto-generated method stub
+		GoodsCode goodsCode=new GoodsCode();
+		goodsCode.setGoodsId(goodsId);
+		goodsCode.setCode(((Integer)(new Random().nextInt(10000000))).toString());
+		codeMapper.addGoodsCode(goodsCode);
 	}
 
 

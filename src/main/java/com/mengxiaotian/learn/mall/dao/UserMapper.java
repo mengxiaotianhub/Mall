@@ -17,9 +17,12 @@ public interface UserMapper {
 	@Select("SELECT * FROM User WHERE userName=#{userName} AND password=#{password}")
 	public User login(@Param("userName") String userName, @Param("password") int password);
 
-	@Select("SELECT point FROM User WHERE id=#{id}")
-	public int getPoint(int id);
+	@Select("SELECT point FROM User WHERE userName=#{userName}")
+	public int getPoint(String userName);
 
+	@Select("SELECT * FROM User WHERE userName=#{userName}")
+	public User getUser(String userName);
+	
 	@Select("SELECT userName FROM User WHERE id=#{id}")
 	public String getUserName(int id);
 

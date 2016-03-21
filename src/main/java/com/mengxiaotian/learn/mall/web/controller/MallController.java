@@ -1,17 +1,18 @@
 package com.mengxiaotian.learn.mall.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.mengxiaotian.learn.mall.meta.Goods;
 import com.mengxiaotian.learn.mall.servlet.GoodsCodeService;
 import com.mengxiaotian.learn.mall.servlet.GoodsService;
 import com.mengxiaotian.learn.mall.servlet.LoginService;
+import com.mengxiaotian.learn.mall.servlet.SignUpService;
 
 @Controller
 public class MallController {
@@ -21,10 +22,14 @@ public class MallController {
 	private GoodsCodeService goodsCodeService;
 	@Autowired
 	private LoginService login;
+	@Autowired
+	private SignUpService signUp;;
 
 	@RequestMapping(value="/userLogin")
-	public String userLogin(@Param("name") String name,@Param("password")int password,Model map) {
+	public String userLogin(@Param("name") String name,@Param("password")int password,Model map,HttpServletRequest request) {
 		if(login.userLogin(name,password)){
+			HttpSession session = request.getSession();
+			session.setAttribute("userName", name);
 			return "redirect:goods";
 		}else{
 			map.addAttribute("message", "error");
@@ -48,9 +53,10 @@ public class MallController {
 	}
 	
 	@RequestMapping(value="/buy")
-	@ResponseBody
-	public String exchange(@Param("goodsId") int goodsId){
-		return goodsCodeService.exchange(1, goodsId).getCode();
+	public String exchange(@Param("goodsId") int goodsId,Model map,HttpSession session){
+		map.addAttribute("code",goodsCodeService.exchange(session.getAttribute("userName").toString(), goodsId).getCode());
+		map.addAttribute("userName", session.getAttribute("userName"));
+		return "buy";
 	}
 	@RequestMapping(value="/manager")
 	public String manager(Model map){
@@ -82,4 +88,36 @@ public class MallController {
 		goodsService.delete(id);
 		return "redirect:manager";
 	}
+	
+	@RequestMapping(value="/getBackGoods")
+	public String getBackGoods(@Param("id") int id){
+		goodsService.getBackGoods(id);
+		return "redirect:manager";
+	}
+	
+	@RequestMapping(value="/addGoodsCode")
+	public String addGoodsCode(@Param("goodsId") int goodsId){
+		goodsCodeService.addGoodsCode(goodsId);
+		return "redirect:manager";
+	}
+	
+	@RequestMapping(value="/managerSignUp")
+	public String managerSignUp(@Param("name") String name,@Param("password") int password){
+		if(signUp.managerSignUp(name, password)){
+			return "redirect:/ManagerLogin.html";
+		}else{
+			return "redirect:/ManagerSignUp.html";
+		}
+		
+	}
+	@RequestMapping(value="/userSignUp")
+	public String userSignUp(@Param("name") String name,@Param("password") int password){
+		if(signUp.userSignUp(name, password)){
+			return "redirect:/UserLogin.html";
+		}else{
+			return "redirect:/UserSignUp.html";
+		}
+		
+	}
+	
 }

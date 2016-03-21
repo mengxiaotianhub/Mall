@@ -14,6 +14,7 @@ public interface GoodsCodeService {
 	
 	public void updateGoodsCode(GoodsCode goodsCode);
 	
-	public GoodsCode exchange(int userId,int goodsId);
+	public GoodsCode exchange(String userName,int goodsId);
 
+	public void addGoodsCode(int goodsId);
 }

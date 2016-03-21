@@ -19,4 +19,7 @@ public interface GoodsService {
 	public List<Goods> getdelete();
 	
 	public void delete(int id);
+	
+	public void getBackGoods(int id);
+	
 }

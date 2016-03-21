@@ -20,7 +20,7 @@ public interface GoodsCodeMapper {
 	@Update("UPDATE GoodsCode SET userName=#{userName},goodsId=#{goodsId},code=#{code},exchangeTime=#{exchangeTime},exchanged=#{exchanged} WHERE id=#{id}")
 	public void updateGoodsCode(GoodsCode goodsCode);
 
-	@Select("SELECT * FROM GoodsCode")
+	@Select("SELECT * FROM GoodsCode ORDER BY exchangeTime DESC,goodsId,userName")
 	public List<GoodsCode> getAllGoodsCode();
 
 	@Select("SELECT * FROM GoodsCode WHERE #{colunm}=#{value}")

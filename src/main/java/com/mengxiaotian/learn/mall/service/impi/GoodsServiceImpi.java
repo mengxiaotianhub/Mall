@@ -25,6 +25,11 @@ public class GoodsServiceImpi implements GoodsService {
 		return goodsMapper.getGoods(colunm, value);
 	}
 
+	public List<Goods> getdelete() {
+		// TODO Auto-generated method stub
+		return goodsMapper.getdelete();
+	}
+	
 	public void addGoods(Goods goods) {
 		// TODO Auto-generated method stub
 		goodsMapper.addGoods(goods);
@@ -38,6 +43,7 @@ public class GoodsServiceImpi implements GoodsService {
 	public void published(int id) {
 		// TODO Auto-generated method stub
 		Goods goods = goodsMapper.getOneGoods(id);
+		goods.setDelete(false);
 		goods.setPublished(true);
 		goodsMapper.updateGoods(goods);
 	}
@@ -45,13 +51,18 @@ public class GoodsServiceImpi implements GoodsService {
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		Goods goods = goodsMapper.getOneGoods(id);
+		goods.setPublished(false);
 		goods.setDelete(true);
 		goodsMapper.updateGoods(goods);
 	}
 	
-	public List<Goods> getdelete() {
+
+	public void getBackGoods(int id) {
 		// TODO Auto-generated method stub
-		return goodsMapper.getdelete();
+		Goods goods = goodsMapper.getOneGoods(id);
+		goods.setPublished(false);
+		goods.setDelete(false);
+		goodsMapper.updateGoods(goods);
 	}
 
 }
