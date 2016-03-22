@@ -17,6 +17,7 @@ import com.mengxiaotian.learn.mall.utils.NotEnoughPoint;
 
 @Controller
 public class MallController {
+	//依赖注入
 	@Autowired
 	private GoodsService goodsService;
 	@Autowired
@@ -25,7 +26,8 @@ public class MallController {
 	private LoginService login;
 	@Autowired
 	private SignUpService signUp;;
-
+	
+	//用户登陆验证，失败返回登陆页面并显示提示信息
 	@RequestMapping(value="/userLogin")
 	public String userLogin(@Param("name") String name,@Param("password")int password,Model map,HttpSession session) {
 		if(login.userLogin(name,password)){
@@ -37,6 +39,7 @@ public class MallController {
 		}
 	}
 	
+	//管理员登陆，失败返回登陆页面并显示提示信息
 	@RequestMapping(value="/managerLogin")
 	public String managerLogin(@Param("name") String name,@Param("password") int password,Model map){
 		if(login.managerLogin(name, password)){
@@ -47,12 +50,14 @@ public class MallController {
 	}
 	}
 	
+	//返回已经发布的商品模型信息
 	@RequestMapping(value="/logined/goods")
 	public String showGoods(Model map){
 		map.addAttribute("goodsList",goodsService.getAllGoods(true));
 		return "main/goods";
 	}
 	
+	//交易服务，同时在这一层捕获并处理没有验证码和余额不足的异常
 	@RequestMapping(value="logined//buy")
 	public String exchange(@Param("goodsId") int goodsId,Model map,HttpSession session){
 		try{
@@ -69,6 +74,7 @@ public class MallController {
 		map.addAttribute("userName", session.getAttribute("userName"));
 		return "main/buy";
 	}
+	//管理页面展示逻辑，返回所有商品和兑换码的模型信息	
 	@RequestMapping(value="/logined/manager")
 	public String manager(Model map){
 		map.addAttribute("goodsList",goodsService.getAllGoods(true));
@@ -77,7 +83,7 @@ public class MallController {
 		map.addAttribute("codeList",goodsCodeService.getAllGoodsCode());
 		return "main/manager";
 	}
-	
+	//******管理页面操作接口
 	@RequestMapping(value="/addGoods")
 	public String addGoods(@Param("goodsName") String goodsName,@Param("description") String description,@Param("point") int point){
 		Goods goods = new Goods();
@@ -111,7 +117,9 @@ public class MallController {
 		goodsCodeService.addGoodsCode(goodsId);
 		return "redirect:logined/manager";
 	}
+	//管理页面操作接口结束*****
 	
+	//管理员注册，用户名被使用返回信息
 	@RequestMapping(value="/managerSignUp")
 	public String managerSignUp(@Param("name") String name,@Param("password") int password,Model map){
 		if(signUp.managerSignUp(name, password)){
@@ -123,6 +131,7 @@ public class MallController {
 		}
 		
 	}
+	//用户注册，用户名被使用返回信息
 	@RequestMapping(value="/userSignUp")
 	public String userSignUp(@Param("name") String name,@Param("password") int password,Model map){
 		if(signUp.userSignUp(name, password)){

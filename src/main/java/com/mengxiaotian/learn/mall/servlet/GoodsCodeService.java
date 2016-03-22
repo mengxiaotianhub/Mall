@@ -10,7 +10,6 @@ public interface GoodsCodeService {
 	
 	public List<GoodsCode> getCodes(String colunm,String value);
 	
-	public void addGoodsCode(GoodsCode goodsCode);
 	
 	public void updateGoodsCode(GoodsCode goodsCode);
 	

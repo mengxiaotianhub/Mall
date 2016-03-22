@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
+//用户登陆验证类
 public class SessionFilter extends OncePerRequestFilter {
 
 	@Override
@@ -17,11 +18,10 @@ public class SessionFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
  
-             // 执行过滤  
              // 从session中获取登录者实体  
              Object obj1 = request.getSession().getAttribute("userName");  
              Object obj2 = request.getSession().getAttribute("userName");  
-             if (obj1 == null & obj2 ==null) {  
+             if (obj1 == null && obj2 ==null) {  
                  // 如果session中不存在登录者实体，则弹出框提示重新登录  
                  PrintWriter out = response.getWriter();  
                  String loginPage = "/mall/index.html";  

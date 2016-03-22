@@ -9,14 +9,16 @@ import com.mengxiaotian.learn.mall.meta.Manager;
 import com.mengxiaotian.learn.mall.meta.User;
 import com.mengxiaotian.learn.mall.servlet.SignUpService;
 
+//定义bean
 @Component("SignUp")
 public class SignUpServiceImpi implements SignUpService {
-	
+	//依赖注入
 	@Autowired
 	private UserMapper userMapper;
 	@Autowired
 	private ManagerMapper managerMapper;
 
+	//用户注册，如果用户名被使用注册失败返回false
 	public boolean userSignUp(String userName, int password) {
 		// TODO Auto-generated method stub
 		if(userMapper.getUser(userName)==null){
@@ -30,7 +32,7 @@ public class SignUpServiceImpi implements SignUpService {
 			return false;
 		}
 	}
-
+	//管理员注册，如果管理员用户名被使用注册失败返回false
 	public boolean managerSignUp(String managerName, int password) {
 		// TODO Auto-generated method stub
 		if(managerMapper.getManager(managerName)==null){
