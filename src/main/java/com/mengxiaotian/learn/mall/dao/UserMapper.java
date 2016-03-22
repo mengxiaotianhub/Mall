@@ -17,8 +17,6 @@ public interface UserMapper {
 	@Select("SELECT * FROM User WHERE userName=#{userName} AND password=#{password}")
 	public User login(@Param("userName") String userName, @Param("password") int password);
 
-	@Select("SELECT point FROM User WHERE userName=#{userName}")
-	public int getPoint(String userName);
 
 	@Select("SELECT * FROM User WHERE userName=#{userName}")
 	public User getUser(String userName);
@@ -26,8 +24,8 @@ public interface UserMapper {
 	@Select("SELECT userName FROM User WHERE id=#{id}")
 	public String getUserName(int id);
 
-	@Update("UPDATE User SET point=#{point}")
-	public void updatePoint(int point);
+	@Update("UPDATE User SET userName=#{userName},password=#{password},point=#{point} WHERE id=#{id}")
+	public void updateUser(User user);
 
 	@Insert("INSERT INTO User SET userName=#{userName},password=#{password},point=#{point}")
 	public void addUser(User user);

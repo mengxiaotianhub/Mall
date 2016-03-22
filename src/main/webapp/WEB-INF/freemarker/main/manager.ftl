@@ -5,6 +5,7 @@
 <title>Manager</title>
 </head>
 <body>
+<p><#if message??>${message}<#else></#if></p>
 <#escape x as x!"null">
 <p>we have these published goods:</p>
 <table border=1>

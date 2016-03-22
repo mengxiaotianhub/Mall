@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.mengxiaotian.learn.mall.meta.Manager;
-import com.mengxiaotian.learn.mall.meta.User;
 
 public interface ManagerMapper {
 	@Select("SELECT * FROM Manager")
